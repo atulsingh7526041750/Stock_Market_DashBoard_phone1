@@ -1,25 +1,29 @@
-// RegistrationPage.js
+// LoginPage.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import StockDashboard from './StockDashboard';
 
-const RegistrationPage = ({ navigation }) => {
+const LoginPage = ({ navigation }) => {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
-  const handleRegistration = () => {
-    // Add your registration logic here
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const handleLogin = () => {
+    // Simulating a static user for login
+    const staticUsername = 'user';
+    const staticPassword = 'password';
 
-    // Navigate to the Login page after registration
-    navigation.navigate('Login');
+    if (username === staticUsername && password === staticPassword) {
+      // Navigate to the StockDashboard screen
+      navigation.navigate('StockDashboard');
+    } else {
+      setLoginError('Invalid username or password');
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create an Account</Text>
+      <Text style={styles.title}>Login</Text>
 
       <TextInput
         style={styles.input}
@@ -30,23 +34,17 @@ const RegistrationPage = ({ navigation }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#666"
-        onChangeText={(text) => setEmail(text)}
-        keyboardType="email-address"
-      />
-
-      <TextInput
-        style={styles.input}
         placeholder="Password"
         placeholderTextColor="#666"
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleRegistration}>
-        <Text style={styles.buttonText}>Register</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
+      {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
     </View>
   );
 };
@@ -88,6 +86,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  errorText: {
+    color: 'red',
+    marginTop: 10,
+  },
 });
 
-export default RegistrationPage;
+export default LoginPage;

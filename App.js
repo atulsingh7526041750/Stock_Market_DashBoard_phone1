@@ -1,15 +1,22 @@
+// App.js
 import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import RegistrationPage from './RegistrationPage';
+import LoginPage from './LoginPage';
+import StockDashboard from './StockDashboard';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{ flex: 1 }}>
-        <RegistrationPage />
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Registration">
+        <Stack.Screen name="Registration" component={RegistrationPage} />
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="StockDashboard" component={StockDashboard} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
